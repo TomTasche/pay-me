@@ -32,6 +32,9 @@ class QueryInventoryTask extends AsyncTask<QueryInventoryTask.Args, Void, Invent
         } catch (IabException ex) {
             mResult = ex.getResult();
             return null;
+        } catch (Exception ex) {
+        	mResult = new IabResult(500, ex.getMessage());
+        	return null;
         }
     }
 
