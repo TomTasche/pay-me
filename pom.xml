@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.jberkel.pay.me</groupId>
     <artifactId>parent</artifactId>
-    <version>0.0.3-SNAPSHOT</version>
+    <version>0.0.5-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>pay-me parent</name>
     <description>pay-me parent</description>
@@ -12,12 +12,12 @@
         <pluginManagement>
           <plugins>
             <plugin>
-                <groupId>com.jayway.maven.plugins.android.generation2</groupId>
+                <groupId>com.simpligility.maven.plugins</groupId>
                 <artifactId>android-maven-plugin</artifactId>
-                <version>3.5.3</version>
+                <version>4.4.1</version>
                 <configuration>
                     <sdk>
-                        <platform>14</platform>
+                        <platform>21</platform>
                     </sdk>
                 </configuration>
                 <extensions>true</extensions>
@@ -35,22 +35,35 @@
                     <target>1.6</target>
                 </configuration>
             </plugin>
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-javadoc-plugin</artifactId>
+              <version>2.10.1</version>
+              <configuration>
+                 <additionalparam>${javadoc.opts}</additionalparam>
+              </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.5.1</version>
+                <configuration>
+                    <tagNameFormat>@{project.version}</tagNameFormat>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
     <modules>
         <module>library</module>
-        <module>tests</module>
         <module>example</module>
     </modules>
 
     <distributionManagement>
       <repository>
-        <id>repo</id>
-        <name>zegoggles Snapshots</name>
-        <url>http://zegoggl.es:8081/nexus/content/repositories/releases/</url>
+        <id>bintray</id>
+        <url>https://api.bintray.com/maven/jberkel/maven/pay-me</url>
       </repository>
-
       <snapshotRepository>
         <uniqueVersion>true</uniqueVersion>
         <id>snapshot-repo</id>
@@ -58,6 +71,14 @@
         <url>http://zegoggl.es:8081/nexus/content/repositories/snapshots/</url>
       </snapshotRepository>
     </distributionManagement>
+
+    <repositories>
+        <repository>
+            <id>sonatype-snapshots</id>
+            <name>sonatype snapshots</name>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+        </repository>
+    </repositories>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -93,5 +114,17 @@
         <url>https://github.com/jberkel/pay-me</url>
         <connection>scm:git:https://github.com/jberkel/pay-me.git</connection>
         <developerConnection>scm:git:git@github.com:jberkel/pay-me.git</developerConnection>
-    </scm>
+      <tag>HEAD</tag>
+  </scm>
+  <profiles>
+    <profile>
+        <id>doclint-java8-disable</id>
+        <activation>
+          <jdk>[1.8,)</jdk>
+        </activation>
+        <properties>
+          <javadoc.opts>-Xdoclint:none</javadoc.opts>
+        </properties>
+    </profile>
+  </profiles>
 </project>
