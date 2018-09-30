@@ -1,6 +1,6 @@
 # pay-me (DEPRECATED)
 
-> please refer to the official [Google Play Billing Library][https://developer.android.com/google/play/billing/billing_library_overview] if you are starting out with a new project
+> please refer to the official [Google Play Billing Library](https://developer.android.com/google/play/billing/billing_library_overview) if you are starting out with a new project
 
 [![Build Status](https://secure.travis-ci.org/jberkel/pay-me.png?branch=master)](http://travis-ci.org/jberkel/pay-me)
 
